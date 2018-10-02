@@ -172,4 +172,25 @@ class HalfTriangleMoverView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    data class Renderer(var view : HalfTriangleMoverView) {
+        private val htm : HalfTriangleMover = HalfTriangleMover(0)
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#BDBDBD"))
+            htm.draw(canvas, paint)
+            animator.animate {
+                htm.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            htm.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
