@@ -22,13 +22,13 @@ fun Canvas.drawHTMNode(i : Int, scale : Float, paint : Paint) {
     val size : Float = gap / 3
     paint.color = Color.parseColor("#4CAF50")
     save()
-    translate(w/2, gap)
+    translate(w/2, i * gap + gap)
     for (j in 0..1) {
         val sf : Float = 1f - 2 * j
         val sc : Float = Math.min(0.5f, Math.max(0f, scale - 0.5f * j)) * 2
         save()
         scale(sf, 1f)
-        translate((w/2 - size) * sc, 0f)
+        translate((w/2) * (1 - sc), 0f)
         rotate(180f * (1 - sc))
         val path : Path = Path()
         path.moveTo(-size,size)
