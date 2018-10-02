@@ -20,7 +20,7 @@ fun Canvas.drawHTMNode(i : Int, scale : Float, paint : Paint) {
     val h : Float = height.toFloat()
     val gap : Float = h / (nodes + 1)
     val size : Float = gap / 3
-    paint.color = Color.parseColor("#4CAF50")
+    paint.color = Color.parseColor("#3F51B5")
     save()
     translate(w/2, i * gap + gap)
     for (j in 0..1) {
@@ -28,13 +28,13 @@ fun Canvas.drawHTMNode(i : Int, scale : Float, paint : Paint) {
         val sc : Float = Math.min(0.5f, Math.max(0f, scale - 0.5f * j)) * 2
         save()
         scale(sf, 1f)
-        translate((w/2) * (1 - sc), 0f)
-        rotate(180f * (1 - sc))
+        translate((w/2 - size) * (1 - sc), 0f)
+        rotate(360f * (1 - sc))
         val path : Path = Path()
-        path.moveTo(-size,size)
+        path.moveTo(size,size)
         path.lineTo(0f, -size)
         path.lineTo(0f, size)
-        path.lineTo(-size, size)
+        path.lineTo(size, size)
         drawPath(path, paint)
         restore()
     }
