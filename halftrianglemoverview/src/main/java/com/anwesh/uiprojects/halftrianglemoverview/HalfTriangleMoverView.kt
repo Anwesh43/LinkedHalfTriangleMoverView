@@ -15,6 +15,32 @@ import android.app.Activity
 
 val nodes : Int = 5
 
+fun Canvas.drawHTMNode(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    val gap : Float = h / (nodes + 1)
+    val size : Float = gap / 3
+    paint.color = Color.parseColor("#4CAF50")
+    save()
+    translate(w/2, gap)
+    for (j in 0..1) {
+        val sf : Float = 1f - 2 * j
+        val sc : Float = Math.min(0.5f, Math.max(0f, scale - 0.5f * j)) * 2
+        save()
+        scale(sf, 1f)
+        translate((w/2 - size) * sc, 0f)
+        rotate(180f * (1 - sc))
+        val path : Path = Path()
+        path.moveTo(-size,size)
+        path.lineTo(0f, -size)
+        path.lineTo(0f, size)
+        path.lineTo(-size, size)
+        drawPath(path, paint)
+        restore()
+    }
+    restore()
+}
+
 class HalfTriangleMoverView(ctx : Context) : View(ctx) {
 
     private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
