@@ -195,4 +195,12 @@ class HalfTriangleMoverView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+        fun create(activity : Activity) : HalfTriangleMoverView {
+            val view : HalfTriangleMoverView = HalfTriangleMoverView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
